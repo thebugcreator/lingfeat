@@ -59,9 +59,12 @@ warnings.filterwarnings("ignore")
 dir_path = os.path.dirname(os.path.realpath(__file__))
 
 # load models
-NLP = spacy.load('en_core_web_sm')
+spacy_pipeline = 'fr_core_news_md'
+NLP = spacy.load(spacy_pipeline)
 SuPar = Parser.load('crf-con-en')
 
+# define supar parser language
+lang_parser = spacy_pipeline.split('_')[0]
 
 class pass_text:
     
@@ -352,7 +355,7 @@ class pass_text:
     - ra_AvAjP_C: ratio of Adv phrases count to Adj phrases count
     """
     def PhrF_(self):
-        result = Synta_PhrF.retrieve(SuPar, self.sent_token_list, self.n_token, self.n_sent)
+        result = Synta_PhrF.retrieve(SuPar, self.sent_token_list, self.n_token, self.n_sent, lang=lang_parser)
         result = nan_check(result)
         return result
     
@@ -370,7 +373,7 @@ class pass_text:
     - at_FTree_C: average length of flattened Trees per token (word)
     """
     def TrSF_(self):
-        result = Synta_TrSF.retrieve(SuPar, self.sent_token_list, self.n_token, self.n_sent)
+        result = Synta_TrSF.retrieve(SuPar, self.sent_token_list, self.n_token, self.n_sent, lang=lang_parser)
         result = nan_check(result)
         return result
 

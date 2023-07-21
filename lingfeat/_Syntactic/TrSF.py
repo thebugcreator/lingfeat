@@ -18,11 +18,11 @@ Publication 1: Schwarm, Sarah E., and Mari Ostendorf. "Reading level assessment 
 import nltk
 from lingfeat.utils import division
 
-def retrieve(SuPar, sent_token_list, n_token, n_sent):
+def retrieve(SuPar, sent_token_list, n_token, n_sent, lang='en'):
     to_TreeH_C = 0
     to_FTree_C = 0
     for sent in sent_token_list:
-        dataset = SuPar.predict([sent], prob=True, verbose=False)
+        dataset = SuPar.predict([sent], prob=True, verbose=False, lang=lang)
         parsed_tree = dataset.sentences
         nltk_tree = nltk.Tree.fromstring(str(parsed_tree[0]))
         to_TreeH_C += int(nltk_tree.height())

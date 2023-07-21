@@ -17,7 +17,7 @@ Publication 2: Lu, Xiaofei. "Automatic analysis of syntactic complexity in secon
 """
 from lingfeat.utils import division
 
-def retrieve(SuPar, sent_token_list, n_token, n_sent):
+def retrieve(SuPar, sent_token_list, n_token, n_sent, lang='en'):
     to_NoPhr_C = 0
     to_VePhr_C = 0
     to_SuPhr_C = 0
@@ -26,7 +26,7 @@ def retrieve(SuPar, sent_token_list, n_token, n_sent):
     to_AvPhr_C = 0
     for sent in sent_token_list:
 
-        dataset = SuPar.predict([sent], prob=True, verbose=False)
+        dataset = SuPar.predict([sent], prob=True, verbose=False, lang=lang)
         parsed_tree = str(dataset.sentences)
         to_NoPhr_C += parsed_tree.count("NP")
         to_VePhr_C += parsed_tree.count("VP")
